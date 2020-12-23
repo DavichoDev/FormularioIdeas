@@ -42,6 +42,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -84,7 +86,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -120,7 +124,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
