@@ -1,38 +1,304 @@
-<mat-horizontal-stepper #stepper>
-  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
-               required>
-      </mat-form-field>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+<div class="fondo">
+  
+  <mat-toolbar>
+    <span style="margin-left: 10px;">CUSTOM WOODS</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <span class="example-spacer"></span>
+      <mat-icon>home</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+    <div class="container">
+  
+      <mat-card style="margin-top: 40px; text-align: center; font-size: 28px;">FORMULARIO DE IDEAS</mat-card>
+  
+      <div class="formulario mt-5">
+          <mat-horizontal-stepper #stepper class="stepper">
+            
+            <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Contacto</ng-template>
+  
+                <div class="row">
+                  <p style="margin-bottom: 0px; text-align: center; font-weight: lighter; font-size: 18px; margin-top: 15px;">Datos personales</p>
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Nombre completo</mat-label>
+                      <input matInput placeholder=" Nombre(s)" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </div>               
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Primer apellido</mat-label>
+                      <input matInput placeholder=" Apellido paterno" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </div>   
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Segundo apellido</mat-label>
+                      <input matInput placeholder=" Apellido materno" formControlName="firstCtrl">
+                    </mat-form-field>
+                  </div>   
+                </div>
+  
+                <div class="row">
+                  <p style="margin-bottom: 0px; margin-top: 40px; text-align: center; font-weight: lighter; font-size: 18px;">Datos de contacto</p>
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Correo electrónico</mat-label>
+                      <input matInput placeholder="contacto@customwoods.com" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </div>               
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Número telefónico</mat-label>
+                      <input matInput placeholder="(55) 00 00 00 00" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </div>   
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Teléfono fijo</mat-label>
+                      <input matInput placeholder="(55) 00 00 00 00" formControlName="firstCtrl">
+                    </mat-form-field>
+                  </div>   
+                </div>
+                
+                <div class="row">
+                  <p style="margin-bottom: 0px; margin-top: 40px; text-align: center; font-weight: lighter; font-size: 18px;">Dirección (opcional)</p>
+                  <div class="col-7">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Domicilio</mat-label>
+                      <input matInput placeholder="Calle Cielito lindo #134, Colonia Agua azul, Nezahualcoyotl, Oaxaca" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </div>               
+  
+                  <div class="col-5">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Código Postal</mat-label>
+                      <input matInput placeholder="00000" formControlName="firstCtrl">
+                    </mat-form-field>
+                  </div>   
+                </div>
+                  
+                <div style="float: right;">
+                  <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Presiona siguiente para continuar</p>
+                  <button mat-raised-button color="primary" style="width: 100%;" matStepperNext>Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+  
+            <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+              <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Plasma aqui tu idea</ng-template>
+                
+                <div class="row">
+                  <p style="margin-bottom: 0px; text-align: center; font-weight: lighter; font-size: 18px; margin-top: 15px;">Dismensiones del mueble (Metros)</p>
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Alto</mat-label>
+                      <input matInput placeholder="1.60m" formControlName="secondCtrl" required>
+                    </mat-form-field>
+                  </div>               
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Largo</mat-label>
+                      <input matInput placeholder="1.25m" formControlName="secondCtrl" required>
+                    </mat-form-field>
+                  </div>   
+  
+                  <div class="col">
+                    <mat-form-field style="width: 100%;">
+                      <mat-label>Ancho</mat-label>
+                      <input matInput placeholder="0.40m" formControlName="secondCtrl">
+                    </mat-form-field>
+                  </div>   
+                </div>
+  
+                <div class="row">
+                  <h4 style="text-align: center; margin-top: 20px; font-size: 20px; font-weight: lighter;">Ejemplo</h4>
+                  <img src="../assets/img/explicacion.png" style="width: 300px; display: block; margin: auto;" alt="Imagen de explicación">
+                </div>
+  
+                <div class="row">
+                  <p style="margin-bottom: 10px; margin-top: 40px; text-align: center; font-weight: lighter; font-size: 18px;">Dirección (opcional)</p>
+  
+                  <div class="col-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label>Material</mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let material of materiales" [value]="material.value">
+                          {{material.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>   
+                  
+                  <div class="col-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label>Tipo de mueble</mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                          {{tipo.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>   
+                  
+                </div>
+  
+                <div class="row">
+                  <p style="margin-bottom: 20px; text-align: center; font-weight: lighter; font-size: 18px; margin-top: 15px;">Enseñanos una imagen</p>
+                  
+                  <div class="col-12" style="text-align: center;">
+                    <label class="file">
+                      <input #file (change)="subirImagen(file.files)" 
+                        style="display: inline-block; margin-top: 20px; margin-bottom: 20px;" type="file" id="file" 
+                        aria-label="File browser example">
+                      <span class="file-custom"></span>
+                    </label>
+                  </div>
+  
+                  <div class="col-12" style="text-align: center;">
+  
+                    <img [src]="imgURL" height="200" *ngIf="imgURL" style="border-radius: 10%;">
+                    <img  *ngIf="!imgURL" src="https://res.cloudinary.com/davicho/image/upload/v1609034115/noImg_zaqmue.png" height="200" style="border-radius: 10%;">
+  
+                  </div>
+  
+                </div>
+  
+                <!-- Colores -->
+                <div class="row">
+                  <p style="margin-bottom: 20px; text-align: center; font-weight: lighter; font-size: 18px; margin-top: 15px;">Escoge un color y un acabado</p>
+                  <div class="col-12">
+                    <div class="row custom-radios">
+  
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Sunset</h3>
+                        <input type="radio" id="color-1" name="color" value="color-1" checked>
+                        <label for="color-1">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+                      
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Caqui</h3>
+                        <input type="radio" id="color-2" name="color" value="color-2">
+                        <label for="color-2">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+                      
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Nápoles</h3>
+                        <input type="radio" id="color-3" name="color" value="color-3">
+                        <label for="color-3">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+                    
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Bermejo</h3>
+                        <input type="radio" id="color-4" name="color" value="color-4">
+                        <label for="color-4">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+                      
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Azul Oz</h3>
+                        <input type="radio" id="color-5" name="color" value="color-5">
+                        <label for="color-5">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+      
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Ceniza</h3>
+                        <input type="radio" id="color-6" name="color" value="color-6">
+                        <label for="color-6">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+      
+                      <div class="col-4">
+                        <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Marrón</h3>
+                        <input type="radio" id="color-7" name="color" value="color-7">
+                        <label for="color-7">
+                          <span>
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                          </span>
+                        </label>
+                      </div>
+      
+                    </div>
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-6 acabados">
+                      <mat-form-field  style="width: 100%;" appearance="fill">
+                        <mat-label>Acabados</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let acabado of acabados" [value]="acabado.value">
+                            {{acabado.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>  
+                    
+                    <div class="col-6 acabados">
+                      <mat-form-field  style="width: 100%;" appearance="fill">
+                        <mat-label>Tipo de solicitud</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let solicitud of solicitudes" [value]="solicitud.value">
+                            {{solicitud.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>  
+                  </div>
+  
+                </div>
+  
+                <div style="float: right;">
+                  <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Presiona siguiente para continuar</p>
+                  <button mat-raised-button color="primary" style="margin-right: 10px; width: 40%;" matStepperPrevious>Atrás</button>
+                  <button mat-raised-button color="primary" style="width: 50%;" matStepperNext>Siguiente</button>
+                </div>
+  
+  
+              </form>
+            </mat-step>
+  
+            <mat-step [stepControl]="thirdFormGroup">
+              <ng-template matStepLabel >Ya casi acabamos</ng-template>
+              <p>You are now done.</p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </mat-step>
+  
+          </mat-horizontal-stepper>
+        </div>
     </div>
-  </mat-step>
-</mat-horizontal-stepper>
+  
+</div>

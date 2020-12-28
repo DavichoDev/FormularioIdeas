@@ -1,3 +1,107 @@
 .mat-form-field {
     margin-top: 16px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 470px){
+
+
+  .stepper {
+    margin-bottom: 200px;
   }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+}
+
+.fondo {
+  background: url('../assets/img/pexels-alex-qian-2343468.jpg') repeat center center fixed; 
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+  
+.container {
+  margin-bottom: 30px;
+}
+
+.custom-radios div {
+  display: inline-block;
+  text-align: center;
+  margin-top: 20px;
+}
+.custom-radios input[type="radio"] {
+  display: none;
+}
+.custom-radios input[type="radio"] + label {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.custom-radios input[type="radio"] + label span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  line-height: 44px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.custom-radios input[type="radio"] + label span img {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.custom-radios input[type="radio"]#color-1 + label span {
+  background-color: #fad6a5;
+}
+.custom-radios input[type="radio"]#color-2 + label span {
+  background-color: #e0d8b0;
+}
+.custom-radios input[type="radio"]#color-3 + label span {
+  background-color: #eccd6a;
+}
+.custom-radios input[type="radio"]#color-4 + label span {
+  background-color: #d22c21;
+}
+.custom-radios input[type="radio"]#color-5 + label span {
+  background-color: #001a57;
+}
+.custom-radios input[type="radio"]#color-6 + label span {
+  background-color: #5f7f7a;
+}
+.custom-radios input[type="radio"]#color-7 + label span {
+  background-color: #70624c;
+}
+.custom-radios input[type="radio"]:checked + label span img {
+  opacity: 1;
+}
+
+.acabados{
+  margin-top: 15px;
+}
+
+@media (max-width: 768px){
+
+  .file .archivo input{
+    margin-top: 0px; 
+    margin-bottom: 0px;
+  }
+
+  .acabados {
+    width: 100%;
+  }
+
+}
+
