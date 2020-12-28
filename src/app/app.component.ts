@@ -13,6 +13,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
 
+  public stepOneValid = false;
+  public stepTwoValid = false;
+  public stepThreeValid = false;
+
   public imagePath;
   imgURL: any;
 
@@ -43,18 +47,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     {value: 'Sofa', viewValue: 'Consulta'}
   ];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+
+    this.crearFormulario();
+
+  }
 
   ngOnInit(): void {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+
   }
 
   ngAfterViewInit(): void {
@@ -63,14 +63,47 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  crearFormulario(): void{
+
+    this.firstFormGroup = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidoPat: ['', Validators.required],
+      apellidoMat: [''],
+      correo: ['', Validators.required],
+      numeroTel: ['', Validators.required],
+      numeroFijo: ['', Validators.required],
+      domicilio: [''],
+      codigoPostal: ['']
+    });
+
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
+    this.thirdFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
+  }
+
   subirImagen( files ): void { // Temp
     if (files.length === 0) { return; }
 
-    let reader = new FileReader();
+    const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
-    reader.onload = (_event) => this.imgURL = reader.result;
-
+    reader.onload = (event) => this.imgURL = reader.result;
   }
+
+  imprimirFormaUno(): void{
+    console.log(this.firstFormGroup.value);
+  }
+  imprimirFormaDos(): void{
+    console.log(this.firstFormGroup.value);
+  }
+  imprimirFormaTres(): void{
+    console.log(this.firstFormGroup.value);
+  }
+
 
 }

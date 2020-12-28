@@ -16,7 +16,7 @@
       <div class="formulario mt-5">
           <mat-horizontal-stepper #stepper class="stepper">
             
-            <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+            <mat-step [stepControl]="firstFormGroup">
               <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Contacto</ng-template>
   
@@ -25,21 +25,21 @@
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Nombre completo</mat-label>
-                      <input matInput placeholder=" Nombre(s)" formControlName="firstCtrl" required>
+                      <input matInput placeholder=" Nombre(s)" formControlName="nombre" >
                     </mat-form-field>
                   </div>               
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Primer apellido</mat-label>
-                      <input matInput placeholder=" Apellido paterno" formControlName="firstCtrl" required>
+                      <input matInput placeholder=" Apellido paterno" formControlName="apellidoPat" >
                     </mat-form-field>
                   </div>   
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Segundo apellido</mat-label>
-                      <input matInput placeholder=" Apellido materno" formControlName="firstCtrl">
+                      <input matInput placeholder=" Apellido materno (opcional)" formControlName="apellidoMat">
                     </mat-form-field>
                   </div>   
                 </div>
@@ -49,21 +49,21 @@
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Correo electrónico</mat-label>
-                      <input matInput placeholder="contacto@customwoods.com" formControlName="firstCtrl" required>
+                      <input matInput placeholder="contacto@customwoods.com" formControlName="correo" >
                     </mat-form-field>
                   </div>               
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Número telefónico</mat-label>
-                      <input matInput placeholder="(55) 00 00 00 00" formControlName="firstCtrl" required>
+                      <input matInput placeholder="(55) 00 00 00 00" formControlName="numeroTel" >
                     </mat-form-field>
                   </div>   
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Teléfono fijo</mat-label>
-                      <input matInput placeholder="(55) 00 00 00 00" formControlName="firstCtrl">
+                      <input matInput placeholder="(55) 00 00 00 00" formControlName="numeroFijo">
                     </mat-form-field>
                   </div>   
                 </div>
@@ -73,26 +73,28 @@
                   <div class="col-7">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Domicilio</mat-label>
-                      <input matInput placeholder="Calle Cielito lindo #134, Colonia Agua azul, Nezahualcoyotl, Oaxaca" formControlName="firstCtrl" required>
+                      <input matInput placeholder="Calle Cielito lindo #134, Colonia Agua azul, Nezahualcoyotl, Oaxaca" formControlName="domicilio" >
                     </mat-form-field>
                   </div>               
   
                   <div class="col-5">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Código Postal</mat-label>
-                      <input matInput placeholder="00000" formControlName="firstCtrl">
+                      <input matInput placeholder="00000" formControlName="codigoPostal">
                     </mat-form-field>
                   </div>   
                 </div>
                   
+                {{ firstFormGroup.valid }}
+
                 <div style="float: right;">
                   <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Presiona siguiente para continuar</p>
-                  <button mat-raised-button color="primary" style="width: 100%;" matStepperNext>Siguiente</button>
+                  <button mat-raised-button color="primary" [disabled]="!firstFormGroup.valid" style="width: 100%;" (click)="imprimirFormaUno()" disabled matStepperNext>Siguiente</button>
                 </div>
               </form>
             </mat-step>
   
-            <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+            <mat-step [stepControl]="secondFormGroup" errorMessage="Address is .">
               <form [formGroup]="secondFormGroup">
                 <ng-template matStepLabel>Plasma aqui tu idea</ng-template>
                 
@@ -101,14 +103,14 @@
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Alto</mat-label>
-                      <input matInput placeholder="1.60m" formControlName="secondCtrl" required>
+                      <input matInput placeholder="1.60m" formControlName="secondCtrl" >
                     </mat-form-field>
                   </div>               
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Largo</mat-label>
-                      <input matInput placeholder="1.25m" formControlName="secondCtrl" required>
+                      <input matInput placeholder="1.25m" formControlName="secondCtrl" >
                     </mat-form-field>
                   </div>   
   
