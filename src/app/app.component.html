@@ -11,10 +11,10 @@
   
     <div class="container">
   
-      <mat-card style="margin-top: 40px; text-align: center; font-size: 28px;">FORMULARIO DE IDEAS</mat-card>
+      <mat-card style="margin-top: 40px; text-align: center; font-size: 28px; opacity: .95;">FORMULARIO DE IDEAS</mat-card>
   
-      <div class="formulario mt-5">
-          <mat-horizontal-stepper #stepper class="stepper">
+      <div class="formulario mt-5" style="opacity: 0.95;">
+          <mat-horizontal-stepper #stepper [linear]="true" class="stepper">
             
             <mat-step [stepControl]="firstFormGroup">
               <form [formGroup]="firstFormGroup">
@@ -24,7 +24,7 @@
                   <p style="margin-bottom: 0px; text-align: center; font-weight: lighter; font-size: 18px; margin-top: 15px;">Datos personales</p>
                   <div class="col">
                     <mat-form-field style="width: 100%;">
-                      <mat-label>Nombre completo</mat-label>
+                      <mat-label>Nombre(s)</mat-label>
                       <input matInput placeholder=" Nombre(s)" formControlName="nombre" >
                     </mat-form-field>
                   </div>               
@@ -56,14 +56,14 @@
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Número telefónico</mat-label>
-                      <input matInput placeholder="(55) 00 00 00 00" formControlName="numeroTel" >
+                      <input matInput placeholder="5500000000" formControlName="numeroTel" >
                     </mat-form-field>
                   </div>   
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Teléfono fijo</mat-label>
-                      <input matInput placeholder="(55) 00 00 00 00" formControlName="numeroFijo">
+                      <input matInput placeholder="5500000000" formControlName="numeroFijo">
                     </mat-form-field>
                   </div>   
                 </div>
@@ -84,8 +84,6 @@
                     </mat-form-field>
                   </div>   
                 </div>
-                  
-                {{ firstFormGroup.valid }}
 
                 <div style="float: right;">
                   <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Presiona siguiente para continuar</p>
@@ -94,7 +92,7 @@
               </form>
             </mat-step>
   
-            <mat-step [stepControl]="secondFormGroup" errorMessage="Address is .">
+            <mat-step [stepControl]="secondFormGroup">
               <form [formGroup]="secondFormGroup">
                 <ng-template matStepLabel>Plasma aqui tu idea</ng-template>
                 
@@ -103,21 +101,21 @@
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Alto</mat-label>
-                      <input matInput placeholder="1.60m" formControlName="secondCtrl" >
+                      <input matInput placeholder="1.60m" formControlName="alto" >
                     </mat-form-field>
                   </div>               
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Largo</mat-label>
-                      <input matInput placeholder="1.25m" formControlName="secondCtrl" >
+                      <input matInput placeholder="1.25m" formControlName="largo" >
                     </mat-form-field>
                   </div>   
   
                   <div class="col">
                     <mat-form-field style="width: 100%;">
                       <mat-label>Ancho</mat-label>
-                      <input matInput placeholder="0.40m" formControlName="secondCtrl">
+                      <input matInput placeholder="0.40m" formControlName="ancho">
                     </mat-form-field>
                   </div>   
                 </div>
@@ -128,12 +126,12 @@
                 </div>
   
                 <div class="row">
-                  <p style="margin-bottom: 10px; margin-top: 40px; text-align: center; font-weight: lighter; font-size: 18px;">Dirección (opcional)</p>
+                  <p style="margin-bottom: 10px; margin-top: 40px; text-align: center; font-weight: lighter; font-size: 18px;">Materiales y mueble</p>
   
                   <div class="col-6">
                     <mat-form-field style="width: 100%;" appearance="fill">
                       <mat-label>Material</mat-label>
-                      <mat-select>
+                      <mat-select formControlName="material">
                         <mat-option *ngFor="let material of materiales" [value]="material.value">
                           {{material.viewValue}}
                         </mat-option>
@@ -144,7 +142,7 @@
                   <div class="col-6">
                     <mat-form-field style="width: 100%;" appearance="fill">
                       <mat-label>Tipo de mueble</mat-label>
-                      <mat-select>
+                      <mat-select formControlName="tipoMueble">
                         <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
                           {{tipo.viewValue}}
                         </mat-option>
@@ -159,7 +157,7 @@
                   
                   <div class="col-12" style="text-align: center;">
                     <label class="file">
-                      <input #file (change)="subirImagen(file.files)" 
+                      <input #file (change)="onFileChange($event)" (change)="subirImagen(file.files)" 
                         style="display: inline-block; margin-top: 20px; margin-bottom: 20px;" type="file" id="file" 
                         aria-label="File browser example">
                       <span class="file-custom"></span>
@@ -171,6 +169,8 @@
                     <img [src]="imgURL" height="200" *ngIf="imgURL" style="border-radius: 10%;">
                     <img  *ngIf="!imgURL" src="https://res.cloudinary.com/davicho/image/upload/v1609034115/noImg_zaqmue.png" height="200" style="border-radius: 10%;">
   
+                    <h3>Si nos muestras una imagen es más facil comprender tu idea</h3>
+
                   </div>
   
                 </div>
@@ -183,7 +183,7 @@
   
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Sunset</h3>
-                        <input type="radio" id="color-1" name="color" value="color-1" checked>
+                        <input type="radio" id="color-1" name="color" value="#fad6a5" checked formControlName="color">
                         <label for="color-1">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -193,7 +193,7 @@
                       
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Caqui</h3>
-                        <input type="radio" id="color-2" name="color" value="color-2">
+                        <input type="radio" id="color-2" name="color" value="#e0d8b0" formControlName="color">
                         <label for="color-2">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -203,7 +203,7 @@
                       
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Nápoles</h3>
-                        <input type="radio" id="color-3" name="color" value="color-3">
+                        <input type="radio" id="color-3" name="color" value="#eccd6a" formControlName="color">
                         <label for="color-3">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -213,7 +213,7 @@
                     
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Bermejo</h3>
-                        <input type="radio" id="color-4" name="color" value="color-4">
+                        <input type="radio" id="color-4" name="color" value="#d22c21" formControlName="color">
                         <label for="color-4">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -223,7 +223,7 @@
                       
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Azul Oz</h3>
-                        <input type="radio" id="color-5" name="color" value="color-5">
+                        <input type="radio" id="color-5" name="color" value="#001a57" formControlName="color">
                         <label for="color-5">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -233,7 +233,7 @@
       
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Ceniza</h3>
-                        <input type="radio" id="color-6" name="color" value="color-6">
+                        <input type="radio" id="color-6" name="color" value="#5f7f7a" formControlName="color">
                         <label for="color-6">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -243,7 +243,7 @@
       
                       <div class="col-4">
                         <h3 style="text-align: center; margin-bottom: 5px; margin-top: 10px;">Marrón</h3>
-                        <input type="radio" id="color-7" name="color" value="color-7">
+                        <input type="radio" id="color-7" name="color" value="#70624c" formControlName="color">
                         <label for="color-7">
                           <span>
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
@@ -258,7 +258,7 @@
                     <div class="col-6 acabados">
                       <mat-form-field  style="width: 100%;" appearance="fill">
                         <mat-label>Acabados</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="acabado">
                           <mat-option *ngFor="let acabado of acabados" [value]="acabado.value">
                             {{acabado.viewValue}}
                           </mat-option>
@@ -269,7 +269,7 @@
                     <div class="col-6 acabados">
                       <mat-form-field  style="width: 100%;" appearance="fill">
                         <mat-label>Tipo de solicitud</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="tipoSolicitud">
                           <mat-option *ngFor="let solicitud of solicitudes" [value]="solicitud.value">
                             {{solicitud.viewValue}}
                           </mat-option>
@@ -283,19 +283,43 @@
                 <div style="float: right;">
                   <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Presiona siguiente para continuar</p>
                   <button mat-raised-button color="primary" style="margin-right: 10px; width: 40%;" matStepperPrevious>Atrás</button>
-                  <button mat-raised-button color="primary" style="width: 50%;" matStepperNext>Siguiente</button>
+                  <button mat-raised-button color="primary" style="width: 50%;" [disabled]="!secondFormGroup.valid" (click)="imprimirFormaDos()" matStepperNext>Siguiente</button>
                 </div>
   
   
               </form>
             </mat-step>
   
-            <mat-step [stepControl]="thirdFormGroup">
+            <mat-step>
               <ng-template matStepLabel >Ya casi acabamos</ng-template>
-              <p>You are now done.</p>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
+            
+              <div class="terminos">
+                <p>Ya casi hemos terminado, solo ten en cuenta lo siguiente: </p>
+                <ul>
+                  <li>Este servicio es gratuito por el momento.</li>
+                  <li>Dependiendo tu tipo de solicitud se comunicará contigo un asesor por correo electrónico o número telefónico.</li>
+                  <li>Se harán tres llamadas, en el caso de comunicación por número telefónico.</li>
+                  <li>Todo acuerdo se efectuará via llama telefónica.</li>
+                  <li><b>Custom Woods</b> se hace cargo totalmente de la información prporcionada en este formulario, solo se utilizará para contacto y acuerdos con el cliente.</li>
+                  <li>La información porporcionada por este medio, solo es referencia para tu costeo o presupuesto.</li>
+                  <li><b>EL COSTO O COTIZACIÓN PROPORCIONADO POR ESTE MEDIO ES UNA APROXIMACIÓN,
+                    <BR> EL COSTO REAL DEPENDENRÁ DE LOS REQUISITOS ESPECÍFICOS QUE SE HABLEN CON EL CLIENTE.</b>
+                  </li>
+                  <li>En el caso de cotizaciones o presupuestos, esta información <b>tomará al menos 3 días en ser enviada</b> al cliente (via correo electrónico).</li>
+                  <li>Todo pago se efectuará via electrónica, y el envio de los productos terminados se harán a domicilio.</li>
+                </ul>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <mat-checkbox [(ngModel)]="terminos" style="margin-bottom: 20px;">Aceptar terminos y condiciones</mat-checkbox>
+                </div>
+              </div>
+
+              <div style="float: right;">
+                <p style="margin-top: 20px; font-weight: 500; font-size: 16px;">Acepta los terminos para continuar</p>
+                <button mat-raised-button color="primary" style="margin-right: 10px; width: 40%;" matStepperPrevious>Atrás</button>
+                <button mat-raised-button color="primary" style="width: 50%;" [disabled]="!terminos" (click)="enviarFormulario()" matStepperNext>Enviar</button>
               </div>
             </mat-step>
   

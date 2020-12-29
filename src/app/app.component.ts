@@ -1,7 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import 'jarallax';
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2';
+import { EmailService } from './services/email.service';
+
 declare var jarallax: any;
+
+
 
 @Component({
   selector: 'app-root',
@@ -11,7 +17,8 @@ declare var jarallax: any;
 export class AppComponent implements OnInit, AfterViewInit {
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
-  public thirdFormGroup: FormGroup;
+
+  public terminos = false;
 
   public stepOneValid = false;
   public stepTwoValid = false;
@@ -42,12 +49,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   ];
 
   solicitudes: any[] = [
-    {value: 'Librero', viewValue: 'Construccion'},
-    {value: 'Closet', viewValue: 'Costeo/Presupuesto'},
-    {value: 'Sofa', viewValue: 'Consulta'}
+    {value: 'Contruccion', viewValue: 'Construccion'},
+    {value: 'Costeo/Presupuesto', viewValue: 'Costeo/Presupuesto'},
+    {value: 'Consulta', viewValue: 'Consulta'}
   ];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private emailService: EmailService) {
 
     this.crearFormulario();
 
@@ -66,29 +73,32 @@ export class AppComponent implements OnInit, AfterViewInit {
   crearFormulario(): void{
 
     this.firstFormGroup = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      apellidoPat: ['', Validators.required],
-      apellidoMat: [''],
-      correo: ['', Validators.required],
-      numeroTel: ['', Validators.required],
-      numeroFijo: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.pattern(`^[a-zA-Z]*$`)]],
+      apellidoPat: ['', [Validators.required, Validators.pattern(`^[a-zA-Z]*$`)]],
+      apellidoMat: ['', Validators.pattern(`^[a-zA-Z]*$`)],
+      correo: ['', [Validators.required, Validators.email]],
+      numeroTel: ['', [Validators.required, Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)]],
+      numeroFijo: ['', Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)],
       domicilio: [''],
-      codigoPostal: ['']
+      codigoPostal: ['', Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)]
     });
 
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-
-    this.thirdFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      alto: ['', [Validators.required, Validators.pattern(`[0-9]+(\.[0-9][0-9]?)?`)]],
+      largo: ['', [Validators.required, Validators.pattern(`[0-9]+(\.[0-9][0-9]?)?`)]],
+      ancho: ['', [Validators.required, Validators.pattern(`[0-9]+(\.[0-9][0-9]?)?`)]],
+      material: ['', Validators.required],
+      tipoMueble: ['', Validators.required],
+      color: ['', Validators.required],
+      acabado: ['', Validators.required],
+      tipoSolicitud: ['', Validators.required],
+      file: [null]
     });
 
   }
 
-  subirImagen( files ): void { // Temp
+  subirImagen( files ): void {
     if (files.length === 0) { return; }
-
     const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
@@ -96,13 +106,49 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   imprimirFormaUno(): void{
-    console.log(this.firstFormGroup.value);
+    // console.log(this.firstFormGroup.value);
   }
   imprimirFormaDos(): void{
-    console.log(this.firstFormGroup.value);
+    // console.log(this.secondFormGroup.value);
   }
-  imprimirFormaTres(): void{
-    console.log(this.firstFormGroup.value);
+
+  onFileChange(event): void {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.secondFormGroup.patchValue({
+          file: reader.result
+       });
+
+      };
+    }
+  }
+
+  async enviarFormulario() {
+
+    const jsonForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
+
+    await this.emailService.enviarFormulario( jsonForm ).subscribe(response => {
+      console.log(response);
+    });
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Tu solicitud se ha enviado correctamente.',
+      text: 'Ve la bandeja de tu correo, recibirás una respuesta exitosa.'
+    });
+
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Tu solicitud se ha enviado correctamente.',
+    //   text: 'Ve la bandeja de tu correo, recibirás una respuesta exitosa.'
+    // });
+
+
   }
 
 

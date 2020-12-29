@@ -43,6 +43,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    //.
+    // AngularMaterial
     MatAutocompleteModule,
     MatBadgeModule,
     MatButtonModule,
@@ -88,7 +90,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTreeModule,
     MatNativeDateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -126,7 +130,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTreeModule,
     MatNativeDateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
