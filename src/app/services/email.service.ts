@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators'
-const urlApi = `http://localhost:3000/api`;
+const urlApi = `https://adminpro-backend-angular.herokuapp.com/api`;
 @Injectable({
   providedIn: 'root'
 })
