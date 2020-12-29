@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import 'jarallax';
 
 // ES6 Modules or TypeScript
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     {value: 'Consulta', viewValue: 'Consulta'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private emailService: EmailService) {
+  constructor(private formBuilder: FormBuilder, private emailService: EmailService, private router: Router) {
 
     this.crearFormulario();
 
@@ -141,7 +142,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       icon: 'success',
       title: 'Tu solicitud se ha enviado correctamente.',
       text: 'Ve la bandeja de tu correo, recibirás una respuesta exitosa.'
-    });
+    }).then(() => {
+      this.router.navigateByUrl('https://custom-woods.herokuapp.com/inicio');
+      location.href = 'https://custom-woods.herokuapp.com/inicio';
+     });
 
   }
 

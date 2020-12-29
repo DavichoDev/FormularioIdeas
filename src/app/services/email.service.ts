@@ -7,8 +7,6 @@ const urlApi = `https://adminpro-backend-angular.herokuapp.com/api`;
 })
 export class EmailService {
 
-  
-
   constructor(private http: HttpClient) {}
 
   enviarFormulario( campos ){
