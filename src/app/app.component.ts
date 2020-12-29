@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import 'jarallax';
+
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
 import { EmailService } from './services/email.service';
@@ -112,20 +113,20 @@ export class AppComponent implements OnInit, AfterViewInit {
     // console.log(this.secondFormGroup.value);
   }
 
-  onFileChange(event): void {
-    const reader = new FileReader();
+  async onFileChange(file) {
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
+    await this.emailService.enviarImg(file.files[0]).subscribe((img) => {
+      this.secondFormGroup.patchValue({
+        file: img
+     });
+    });
 
-      reader.onload = () => {
-        this.secondFormGroup.patchValue({
-          file: reader.result
-       });
 
-      };
-    }
+  }
+
+  async obtenerUrlImg( imgToSend ) {
+    const respuesta = await this.emailService.enviarImg(imgToSend).subscribe();
+    return respuesta;
   }
 
   async enviarFormulario() {
@@ -141,13 +142,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       title: 'Tu solicitud se ha enviado correctamente.',
       text: 'Ve la bandeja de tu correo, recibirás una respuesta exitosa.'
     });
-
-    // Swal.fire({
-    //   icon: 'error',
-    //   title: 'Tu solicitud se ha enviado correctamente.',
-    //   text: 'Ve la bandeja de tu correo, recibirás una respuesta exitosa.'
-    // });
-
 
   }
 

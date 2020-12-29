@@ -157,7 +157,7 @@
                   
                   <div class="col-12" style="text-align: center;">
                     <label class="file">
-                      <input #file (change)="onFileChange($event)" (change)="subirImagen(file.files)" 
+                      <input #file (change)="onFileChange(file)" (change)="subirImagen(file.files)" 
                         style="display: inline-block; margin-top: 20px; margin-bottom: 20px;" type="file" id="file" 
                         aria-label="File browser example">
                       <span class="file-custom"></span>
