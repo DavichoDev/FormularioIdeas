@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       numeroTel: ['', [Validators.required, Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)]],
       numeroFijo: ['', Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)],
       domicilio: [''],
-      codigoPostal: ['', Validators.pattern(`^((\\+91-?)|0)?[0-9]{10}$`)]
+      codigoPostal: ['', Validators.pattern(`^((\\+91-?)|0)?[0-9]{5}$`)]
     });
 
     this.secondFormGroup = this.formBuilder.group({
