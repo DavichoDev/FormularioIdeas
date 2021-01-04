@@ -149,5 +149,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
+  navHome(){
+    this.router.navigateByUrl("https://custom-woods.herokuapp.com/inicio");
+  }
 
 }
